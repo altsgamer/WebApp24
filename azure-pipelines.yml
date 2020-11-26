@@ -4,7 +4,7 @@ trigger:
 name: test-prolet
 
 pool:
-  name: vm-pln
+  name: vm-pln-agent18
   
 
 variables:
