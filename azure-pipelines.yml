@@ -4,14 +4,14 @@ trigger:
 name: test-prolet
 
 pool:
-  name: vm-pln-agent18
+  name: vm-pln-18
   
 
 variables:
   sltn: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  buildVer: 0.24.$(Build.BuildID)
+  buildVer: 0.18.$(Build.BuildID)
 
 steps:
 
