@@ -1,0 +1,53 @@
+trigger:
+- master
+
+name: test-progon
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  sltn: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  buildVer: 0.24.$(Build.BuildID)
+
+steps:
+
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(sltn)'
+
+- task: VSBuild@1
+  displayName: Build Zip
+  inputs:
+    solution: '$(sltn)'
+    msbuildArgs: '/p:DeployOnBuild=true
+                  /p:WebPublishMethod=Package
+                  /p:PackageAsSingleFile=true
+                  /p:SkipInvalidConfigurations=true
+                  /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: NuGetCommand@2
+  displayName: Pack NuGet
+  inputs:
+    command: pack
+    packagesToPack: '**/*.csproj'
+    packDestination: '$(Build.ArtifactStagingDirectory)'
+    versioningScheme: byEnvVar
+    versionEnvVar: buildVer
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Build Artifacts
+
+- task: NuGetCommand@2
+  displayName: Push NuGet to Artifacts
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '935ba769-a60f-43b6-89bd-0fae2569baca/61e4c3bd-7c78-418f-9f64-621764482b4c'
