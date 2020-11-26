@@ -4,7 +4,8 @@ trigger:
 name: test-prolet
 
 pool:
-  vmImage: 'windows-latest'
+  name: vm-pln
+  
 
 variables:
   sltn: '**/*.sln'
