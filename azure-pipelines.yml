@@ -11,7 +11,7 @@ variables:
   sltn: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  buildVer: 0.18.$(Build.BuildID)
+  buildVer: 24.18.$(Build.BuildID)
 
 steps:
 
