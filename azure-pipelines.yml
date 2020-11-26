@@ -45,10 +45,10 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: Publish Build Artifacts
 
-- task: NuGetCommand@2
-  displayName: Push NuGet to Artifacts
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: '935ba769-a60f-43b6-89bd-0fae2569baca/61e4c3bd-7c78-418f-9f64-621764482b4c'
+#- task: NuGetCommand@2
+#  displayName: Push NuGet to Artifacts
+#  inputs:
+#    command: 'push'
+#    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+#    nuGetFeedType: 'internal'
+#    publishVstsFeed: '935ba769-a60f-43b6-89bd-0fae2569baca/61e4c3bd-7c78-418f-9f64-621764482b4c'
